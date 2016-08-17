@@ -1,0 +1,55 @@
+
+
+
+<script>
+
+function employeelogin(){
+//document.write("Nitish");  
+var name=document.f1.myname.value;  
+var password=document.f1.mypass.value;   
+//document.write(name);
+
+var arr1 = JSON.parse(localStorage.getItem("arr"));
+document.getElementById("wel").innerHTML=name +" "+password;
+var i;
+for(i=0;i<arr1.length;i++)
+{
+
+//document.getElementById("wel").innerHTML += "Hii "+ ""+arr1[i].fname+" Your Salary is "+arr1[i].salary;
+
+	if(name==arr1[i].fname && password==arr1[i].id)
+	{
+		//document.write("Success");
+		document.getElementById("wel").innerHTML += "Hii "+ ""+arr1[i].fname+" Your Salary is "+arr1[i].salary;
+		document.getElementById("empdiv").style.display = 'none';
+		break;
+
+		
+	}
+	else
+	{
+		document.write("Failure");
+	}  
+
+}
+return false;
+}
+
+</script>
+
+
+<div id="empdiv">
+<form name="f1"  onsubmit="return employeelogin()">  
+<table>
+<tr><td>Name:</td><td><input type="text" name="myname"/>  
+<span id="namelocation" style="color:red"></span></td></tr> 
+<tr><td>Password:</td><td><input type="password" name="mypass"/>  
+<span id="passwordlocation" style="color:red"></span></td></tr>
+<tr><td colspan="2"><input type="submit" value="Login"/>  </td></tr>
+</table>
+</form> 
+</div>
+
+<div id = "wel">
+	
+ </div>

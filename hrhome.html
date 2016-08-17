@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<head>
+
+<title>CronJ</title>
+<style>
+{
+
+}
+.className{
+border-radius: 10px;margin:10px; height:32px; background-color:#ecf0f1;
+}
+
+.classbutton{
+background-color:#444;
+color:white;
+width:90px;
+font-size:15px;
+
+margin:10px;
+padding:10px;
+}
+
+.classbutton1{
+height:40px;
+  width:80px;
+  background: #000; /* Just so we can see it */
+  position: absolute;
+  top: 50px;
+  color:white;
+  left: 50%;  /* Put the left edge on the horizontal center */
+  margin-left: 50px;
+}
+#container{
+background-color:000;
+height:656px;
+
+}
+.addemployee{
+height: 500px;
+  width: 500px;
+  background: #000;
+ 
+  font-style: oblique;
+  color: #fff;
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.aboveaddemp{
+background-color:#333;
+width:50%;
+padding:80px;
+float:left;
+}
+#addemp {
+width:470px;;
+padding:15px;
+height:400px;
+margin:0px;
+background-color:#666;
+}
+#emplog{
+width:10%;
+height:10%;
+background-color:#999;
+}
+
+#showemp{
+	background-color:#ccc;
+	width:30%;
+	height:650px;
+	float:right;
+	color:black;
+	
+}
+</style>
+</head>
+<body>
+
+<script>
+
+
+var hrname = localStorage.getItem("name");
+var pass = localStorage.getItem("pass");
+var status=false;
+
+
+
+//document.getElementById("welhr").innerHTML+="Welcome" +" "+ hrname + "!! Here you can add your employee";
+</script>
+
+<script>  
+var showflag=false;
+var addflag=false;
+function emp(fname,email,id,salary,arrcomment){  
+this.id=id;  
+this.fname=fname;  
+this.salary=salary; 
+this.arrcomment=arrcomment;
+this.email=email;
+}
+
+var arr = new Array();
+
+function myFunction()
+{  
+addflag=true;
+var id=document.myform.pass.value;  
+var fname = document.myform.fname.value;  
+var salary = document.myform.salary.value;  
+var email = document.myform.email.value; 
+var arrcomment =  new Array();
+if(id==""|| fname=="" || salary=="" ||email=="")
+{
+alert("empty field");
+return;
+}
+var atposition=email.indexOf("@");  
+var dotposition=email.lastIndexOf(".");  
+if(atposition<1 || dotposition<atposition+2 || dotposition+2>=email.length)
+{
+alert("invalid email");
+return;
+}
+
+var e= new emp(fname,email,id,salary,arrcomment);
+console.log(e);
+arr.push(e);
+alert("Employee "+ fname +" added");
+
+localStorage.setItem("arr", JSON.stringify(arr));
+return false;
+} 
+
+
+
+
+function logout(){
+	
+	window.location="login.html";
+
+}
+
+function showDetails(myid){
+//alert("hello");
+console.log(myid);
+localStorage.setItem("pass",myid);
+window.location="hrremark.html";
+
+}
+
+function showEmployee(){
+
+var arrp = JSON.parse(localStorage.getItem("arr"));
+var i;
+if(showflag==false || addflag==true){
+for(i=0;i<arrp.length;i++)
+	{
+
+		localStorage.setItem("name"+ [i],arrp[i].fname);
+		localStorage.setItem("pass" + [i],arrp[i].id);
+		document.getElementById("showemp").innerHTML+="<br>"+ arrp[i].fname + "<button onclick=showDetails('"+arrp[i].id+"')>Get Details</button>";
+	showflag=true;
+	addflag=false;
+	}
+return false;
+}
+}
+
+function validateName(){
+	var name=document.myform.fname.value;
+	
+	if(name=="")
+		//alert("Name field is empty");
+	document.getElementById("namelocation").innerHTML="Enter Your Name ";
+	else if(name.length<3)
+		document.getElementById("namelocation").innerHTML="Name length should be greater than 2 ";
+	else
+		document.getElementById("namelocation").innerHTML = "";
+	return;
+}
+
+function validateEmail(){
+var email=document.myform.email.value;
+var atposition=email.indexOf("@");  
+var dotposition=email.lastIndexOf(".");
+if(email=="")
+document.getElementById("emaillocation").innerHTML="Enter Your Email ";
+
+else if(atposition<1 || dotposition<atposition+2 || dotposition+2>=email.length)
+	{
+		document.getElementById("emaillocation").innerHTML="Invalid Email ";
+		return;
+	}
+
+}
+
+function validatePassword(){
+var pass=document.myform.pass.value;
+if(pass==""){
+	document.getElementById("passlocation").innerHTML="Password can't be null";
+	return;
+}
+else if(pass.length<4){
+	document.getElementById("passlocation").innerHTML="Password should be greater than 4";
+}
+
+}
+
+function validateSalary(){
+	var salary=document.myform.salary.value;
+	
+	if(salary == ""){
+		document.getElementById("salarylocation").innerHTML="Enter Salary";
+	return;
+	}
+}
+
+function searchEmployee(){
+	var search = document.searchEmp.search.value;
+	var myarr = JSON.parse(localStorage.getItem("arr"));
+	alert(search);
+	var i;
+	var namesearch="";
+	for(i=0;i<myarr.length;i++){
+		if(myarr[i].fname==search)
+		{
+			//alert(search);
+			namesearch=myarr[i].fname;
+			//alert(namesearch);
+			document.getElementById("showemp").innerHTML=namesearch;
+
+		}
+
+	}
+	if(namesearch="")
+		document.getElementById("showemp").innerHTML="Name not found";
+	return false;
+}
+
+//function callReset(){
+
+//}
+</script> 
+
+
+<div id="container">
+<div id="showemp"><button onclick="showEmployee()">Show Employee </button>
+
+		<div>
+			<form name="searchEmp" onsubmit="return searchEmployee()">
+			<input type="text" name="search">
+			<input type="submit" value="search">
+			</form>
+		</div>
+
+</div>
+<div class=aboveaddemp>
+<div class=addemployee><h3>Add Employee</h3>
+
+<div id="addemp">
+<form id="myformid2" name="myform" onsubmit="return myFunction();">
+
+<input  class = className type = text name="fname" placeholder=Name onblur="validateName()">
+<br>
+<span id="namelocation" style="color:red"></span>
+<br>
+<input   class="className" type = text name="email" placeholder=Email onblur="validateEmail()">
+<br>
+<span id="emaillocation" style="color:red;"></span>
+<br>
+<input class="className" type=password name="pass" placeholder=Password onblur="validatePassword()">
+<br>
+	<span id="passlocation" style="color:red"></span>
+<br>
+<input class="className" type=text name="salary" placeholder=salary onblur="validateSalary()">
+<br>
+<span id="salarylocation" style="color:red"></span>
+<br>
+<!--<textarea  class=className rows="2" cols="25" name="comment" placeholder= "Enter comment">-->
+</textarea>
+<br>
+
+<input class=classbutton type = reset value="RESET">
+<input  class=classbutton type =submit value=ADD>
+</form>
+<button class=classbutton1 onclick=logout()>Log Out</button>
+</div>
+
+</div>
+
+<div>
+</div>
+<div id="empdisplay"></div>
+
+
+
+
+</body>
+</head>

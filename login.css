@@ -1,0 +1,94 @@
+#login{
+float:left;
+background-color:#3598dc;
+border-radius:20px;
+width:400px;
+color:black;
+
+left:30%;
+padding:30px;
+margin:40px;
+}
+
+#insidelogin,#insideempdiv{
+background-color:white;
+border-radius: 5px 20px 5px;
+padding:15px;
+margin:15px;
+
+}
+#empdiv{
+float:left;
+background-color:#3598dc;
+border-radius:20px;
+width:400px;
+color:black;
+
+left:30%;
+padding:30px;
+margin:40px;
+
+
+}
+
+
+#regis ,#eregis{
+background-color:#000;
+color:#fff;
+border-radius: 10px;
+margin:10px; 
+height:40px; 
+background-color:#3598dc;
+width:240px;
+}
+
+#id02{
+	color:red;
+	
+}
+#emplogin{
+position:absolute;
+
+background-color#000;
+height:50px;
+margin:15px;
+padding:15px;
+position: absolute;
+right:20px;
+top:20px;
+
+}
+
+#empname{
+width:90px;
+}
+#emppass{
+width:90px;
+}
+
+
+#red {
+    width: 1px; /* you could actually just change it to 0px */
+    margin: 100px auto;
+    background: red;
+}
+#blue {
+    width: 200px;
+    background: blue;
+}
+#foot{
+display: block;
+    position: relative;
+    margin-bottom: 2em;
+    clear: both;
+background:#555;
+
+}
+.container{
+
+background-color:#000;
+color:white;
+height:50px;
+margin:0px;
+
+}

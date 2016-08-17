@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<head>
+<title>profile</title>
+<style>
+#myid{
+	background-color:#000;
+	height:650px;
+}
+#inmyid{
+margin:50px;
+	background-color:#fff;
+	height:500px;
+	border-radius:50px;
+	text-align:center;
+	padding:30px;
+	color:green;
+	overflow: auto;
+}
+.out{
+float:right;
+background-color:black;
+width:80px;
+
+
+color:white;
+}
+</style>
+
+</head>
+
+<body id="myid">
+<div id="inmyid">
+&nbsp &nbsp &nbsp &nbsp     <h3>Employee Profile</h3>
+
+<div class=out><button  style="color:white;background-color:#000; height:60px; "onclick=logout()><h4>Logout</h4></button></div>
+</div>
+</body>
+
+
+<script>
+
+mydisplay();
+function mydisplay(){
+var email = localStorage.getItem("email");
+var password = localStorage.getItem("password");
+if(email==null)
+{
+window.location="login.html";
+}
+var arr3 = JSON.parse(localStorage.getItem("arr"));
+
+//alert(username);
+//alert(arr3[0].fname);
+//document.write(arr3[0].fname);
+//document.write(password);
+//alert(arr3[0].fname +" username: "+username);
+var i;
+var j;
+var k;
+for(i=0; i< arr3.length; i++)
+{	//alert(arr3[i].fname +" "+username)
+
+	if(arr3[i].email==email && arr3[i].id==password)
+	{
+	
+		document.getElementById("inmyid").innerHTML+="Name : "+arr3[i].fname +"<br>Email: "+arr3[i].email+"<br> Salary : Rs."+arr3[i].salary+ "<br>Remark by HR : ";
+
+		for(j=0;j<arr3[i].arrcomment.length;j++){
+			//alert(arr3[i].arrcomment.length);
+			k=j+1;
+			document.getElementById("inmyid").innerHTML+="<br>( "+k+" ) : "+arr3[i].arrcomment.slice(j,j+1);
+		}
+		//alert(arr3[i].fname +" "+arr3[i].salary+" "+arr3[i].comment);
+		
+		break;
+	}
+}
+}
+
+function logout()
+{
+window.location="login.html";
+}
+</script>
+
+
+

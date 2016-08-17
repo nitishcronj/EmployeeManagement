@@ -1,0 +1,216 @@
+<html>
+
+<head>
+<title>CronJ</title>
+
+<style>
+
+#login{
+float:left;
+background-color:#3598dc;
+border-radius:20px;
+width:400px;
+color:black;
+
+left:30%;
+padding:30px;
+margin:40px;
+}
+
+#insidelogin,#insideempdiv{
+background-color:white;
+border-radius: 5px 20px 5px;
+padding:15px;
+margin:15px;
+
+}
+#empdiv{
+float:left;
+background-color:#3598dc;
+border-radius:20px;
+width:400px;
+color:black;
+
+left:30%;
+padding:30px;
+margin:40px;
+
+
+}
+
+
+#regis ,#eregis{
+background-color:#000;
+color:#fff;
+border-radius: 10px;
+margin:10px; 
+height:40px; 
+background-color:#3598dc;
+width:240px;
+}
+
+#id02{
+	color:red;
+	
+}
+#emplogin{
+position:absolute;
+
+background-color#000;
+height:50px;
+margin:15px;
+padding:15px;
+position: absolute;
+right:20px;
+top:20px;
+
+}
+
+#empname{
+width:90px;
+}
+#emppass{
+width:90px;
+}
+
+
+#red {
+    width: 1px; /* you could actually just change it to 0px */
+    margin: 100px auto;
+    background: red;
+}
+#blue {
+    width: 200px;
+    background: blue;
+}
+#foot{
+display: block;
+    position: relative;
+    margin-bottom: 2em;
+    clear: both;
+background:#555;
+
+}
+.container{
+
+background-color:#000;
+color:white;
+height:50px;
+margin:0px;
+
+}
+</style>
+</head>
+<body>
+
+
+	
+
+
+<p id=id03></p>
+
+
+    <script> 
+ 
+    var arr2 = JSON.parse(localStorage.getItem("arr"));
+	//document.write(arr2);
+    //document.write(arr2[0].fname);
+	//documet.getElementById("id03").innerHTML = arr2[0].fname;
+
+    function validate(){  
+    var email=document.f1.myemail.value;  
+    var password=document.f1.password.value;  
+    var stat=false;  
+      
+	var object1 = { "email" : "santhosh@cronj.com", "pass"  : "123456" };
+	 
+	
+	if(email==object1.email && password==object1.pass){
+	
+	localStorage.setItem("email",email);
+	localStorage.setItem("pass",password);
+	window.location="hrhome.html";
+	}
+	else
+	{
+		//document.getElementById("mydivid2").style.display = 'none';
+
+		alert("Please input correct name and password");
+	}    
+
+    return false;  
+    }
+
+	function employeelogin(){
+	
+		var arr2 = JSON.parse(localStorage.getItem("arr"));
+		//alert(arr2);
+		var email=document.f2.myemail.value;  
+		var password=document.f2.mypass.value;  
+
+		//document.getElementById("wel").innerHTML += name +" "+password+" "+arr2[0].fname; //"Hii "+ ""+arr1[i].fname+" Your Salary is "+arr1[i].salary;
+		var i;
+		for(i=0;i<arr2.length;i++)
+		{
+		//document.getElementById("wel").innerHTML += "Hii "+ ""+arr1[i].fname+" Your Salary is "+arr1[i].salary;
+		if(email==arr2[i].email && password==arr2[i].id)
+		{
+		//document.getElementById("wel").innerHTML += "Hii "+ ""+arr2[i].fname+" Your Salary is "+arr2[i].salary;
+		//document.getElementById("empdiv").style.display = 'none';
+		//break;
+		localStorage.setItem("email",arr2[i].email);
+		localStorage.setItem("password",arr2[i].id);
+		window.location="employ.html";		
+		break;
+		}
+		}
+		if(i==arr2.length)
+		{
+			alert("Login failed");
+		}
+	return false;
+		}
+
+  
+    </script>  
+
+<!-- login for hr -->
+<div  class=container>
+<h2 style="text-align: center;color:white;">Employee Management System</h2>
+      <div id="login">
+      <div id="insidelogin">
+	<h4>HR Please Login!!</h4>
+    <form id="myformid1" name="f1" action="#" onsubmit="return validate()">  
+    <table>  
+    <tr><td></td><td><input style="border-radius: 10px;margin:10px; height:40px; background-color:#ecf0f1;" type="text" name="myemail" placeholder="Enter email"/>  
+    <span id="nameloc"></span></td></tr>  
+    <tr><td></td><td><input style="border-radius: 10px;margin:10px; height:40px; background-color:#ecf0f1;" type="password" name="password" placeholder="Enter Password"/>  
+    <span id="passwordloc"></span></td></tr>  
+    <tr><td colspan="2"><input id =regis type="submit" value="Log In"/></td></tr>  
+    </table>  
+    </form>  
+    </div>
+</div>
+
+<div id="empdiv">
+<div id="insideempdiv">
+<h4>Employee Please Login!!</h4>
+<form name="f2" onsubmit="return employeelogin()" >  
+<table>
+<tr><td></td><td><input style="border-radius: 10px;margin:10px; height:40px; background-color:#ecf0f1;" type="text" name="myemail" placeholder="Enter Email"/>  
+<span id="namelocation" style="color:red"></span></td></tr> 
+<tr><td></td><td><input style="border-radius: 10px;margin:10px; height:40px; background-color:#ecf0f1;" type="password" name="mypass"  placeholder="Enter Password"/>  
+<span id="passwordlocation" style="color:red"></span></td></tr>
+<tr><td colspan="2"><input id = eregis type="submit" value="Login"/>  </td></tr>
+</table>
+</form> 
+</div>
+</div>
+ </div>
+
+
+<div id="wel"></div>
+<div id="id02"></div>
+
+
+

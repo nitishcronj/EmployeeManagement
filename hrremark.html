@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<head>
+<h4>View Employee Details</h4>
+<style>
+.classbutton{
+height:40px;
+  width:80px;
+  background: #000; /* Just so we can see it */
+  position: absolute;
+  top: 50px;
+  color:white;
+  left: 50%;  /* Put the left edge on the horizontal center */
+  margin-left: 50px;
+}
+</style>
+
+</head>
+<body>
+<div id=userdetail></div>
+
+<script>
+//var commentarr = new Array();
+
+var commentlength;
+
+var pass = localStorage.getItem("pass");
+var arrq = JSON.parse(localStorage.getItem("arr"));
+//alert(pass);
+userDetails();
+function userDetails(){
+	var i;
+	for(i=0;i<arrq.length;i++){
+		if(arrq[i].id==pass)
+		{
+			document.getElementById("userdetail").innerHTML += "Your Name : " + arrq[i].fname + "<br>Your Salary:"+arrq[i].salary +"<br>Your Email Id:"+arrq[i].email;
+			showComment();
+		}
+}
+
+}
+
+
+function callReload(){
+	location.reload();
+}
+
+function addComment(){
+	//alert("hii");
+	var i;
+	var newcomment = document.addcomment.mycomment.value; 
+	//alert(pass);
+	if(newcomment=="")
+	{
+		document.getElementById("commentlocation").innerHTML="Comment is Empty";
+		return false;
+	}
+	var arrt = JSON.parse(localStorage.getItem("arr"));
+	for (var i = 0; i < arrt.length; i++) {
+
+		if(arrt[i].id==pass){
+			arrt[i].arrcomment.push(newcomment);
+			localStorage.setItem("arr", JSON.stringify(arrt));
+    	//document.getElementById("userdetail").innerHTML +="<br>" +newcomment;
+    	}
+
+	}
+	callReload();
+	return false;
+	
+}
+
+function showComment(){
+	//alert("show");
+	var j,k;
+	var arrt = JSON.parse(localStorage.getItem("arr"));
+	commentlength=arrt.length;
+	for(j=0;j<arrt.length;j++){
+
+		if(arrt[j].id==pass){
+			for(k=0;k<arrt[j].arrcomment.length;k++){
+
+		document.getElementById("userdetail").innerHTML += "<br><b>Remarks :("+k+") : </b> "+ arrt[j].arrcomment.slice(k,k+1) ;
+	}
+		
+	}
+}
+
+return false;
+}
+
+function validateComment(){
+	var comment = document.addcomment.mycomment.value;
+	if(comment=="")
+	{
+		document.getElementById("commentlocation").innerHTML="Comment is Empty";
+		return;
+	}
+
+}
+
+function logout(){
+	
+	window.location="login.html";
+
+}
+//alert(name);
+</script>
+<button class=classbutton onclick=logout()>Log Out</button>
+<form name="addcomment" id=addcommentid onsubmit="return addComment()">
+<input type="text"  name = "mycomment">
+<span id="commentlocation" style="color:red"></span>
+<input type="submit" name="submit" value="Add Comment">
+</form>
+
+<div id=showCommentId></div>
+</body>
+</html>
